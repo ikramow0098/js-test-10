@@ -35,3 +35,34 @@ console.log(prod1.getDetails());
 prod1.updateStock(3);
 console.log(prod1.getDetails());
 
+/*Task 2: Creating an Order Class
+
+Created an Order class with orderId, product, and quantity.
+Added:
+getOrderDetails() → Returns order info.
+Stock is reduced when an order is placed.
+*/
+
+class Order {
+  constructor(orderId, product, quantity) {
+      if (product.stock >= quantity) {
+          this.orderId = orderId;
+          this.product = product;
+          this.quantity = quantity;
+          this.totalPrice = product.price * quantity;
+          product.updateStock(quantity);
+      } else {
+          console.log("Order cannot be placed. Insufficient stock.");
+      }
+  }
+
+  getOrderDetails() {
+      return `Order ID: ${this.orderId}, Product: ${this.product.name}, Quantity: ${this.quantity}, Total Price: $${this.totalPrice}`;
+  }
+}
+
+// Test Case
+const order1 = new Order(501, prod1, 2);
+console.log(order1.getOrderDetails()); 
+console.log(prod1.getDetails());
+
